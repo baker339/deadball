@@ -1,0 +1,82 @@
+Deadball Academy: Complete Lesson Plan & Practice Structure
+===========================================================
+
+MODULE 1: Geometry of Batted Ball Flight
+----------------------------------------
+- Introduction to Geometry in Baseball
+- Launch Angle
+- Distance Calculations
+- Apex & Hang Time
+- Field Geometry & Ballparks
+- Deadball Context
+- Practice & Mastery
+  - Numeric, multiple choice, and scenario-based questions for each subtopic
+
+MODULE 2: Trigonometry in Baseball
+----------------------------------
+- Introduction to Trigonometry in Baseball
+- SOHCAHTOA Refresher
+- Velocity Components (vx, vy)
+- Triangle Diagrams & Visualization
+- Trigonometric Applications in Ball Flight
+- Practice & Mastery
+  - Calculate vertical/horizontal velocity
+  - Identify correct triangle for a given scenario
+  - Real-world Statcast angle/velocity breakdowns
+
+MODULE 3: Newtonian Physics & Drag
+----------------------------------
+- Introduction to Newtonian Physics in Baseball
+- Newton’s Laws in Ball Flight
+- Gravity & Acceleration
+- Drag Force: Formula & Variables
+- Modeling Home Run Distance with Drag
+- Practice & Mastery
+  - Calculate drag force for given parameters
+  - Predict effect of changing drag coefficient
+  - Scenario-based: "Why did this ball fall short?"
+
+MODULE 4: Exit Velocity & Home Run Probability
+----------------------------------------------
+- What is Exit Velocity?
+- How Exit Velocity Affects Distance
+- Home Run Probability Models
+- Interactive Simulations
+- Practice & Mastery
+  - Compare outcomes for different exit velocities
+  - Estimate home run probability for given stats
+
+MODULE 5: Environmental Factors
+-------------------------------
+- Air Density, Wind, and Temperature
+- Weather Effects on Ball Flight
+- Ballpark Location & Altitude
+- Practice & Mastery
+  - Predict effect of weather changes
+  - Scenario-based: "Would this be a home run in Denver?"
+
+MODULE 6: Data Analysis & Visualization
+---------------------------------------
+- Reading Statcast Charts
+- Scatterplots, Histograms, and More
+- Interpreting Real MLB Data
+- Practice & Mastery
+  - Identify trends in provided data
+  - Match chart to scenario
+
+MODULE 7: Practice & Mastery (Cumulative)
+-----------------------------------------
+- Mixed questions from all modules
+- Challenge Mode: Real-world scenarios
+- Synthesis problems requiring multiple concepts
+
+---
+
+Sample Practice Question Types:
+- Numeric input (with tolerance)
+- Multiple choice
+- Scenario-based (choose best explanation)
+- Data interpretation (read a chart, pick a trend)
+- Calculation (show work, get instant feedback)
+
+This document is a living reference for curriculum development. Expand, reorder, or add subtopics as the Academy grows! 
