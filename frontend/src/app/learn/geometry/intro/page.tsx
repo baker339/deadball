@@ -12,7 +12,7 @@ export default function GeometryIntro() {
           Geometry is everywhere in baseball. From the diamond’s layout to the arc of a home run, understanding geometry helps us decode the game’s most exciting moments—and the science behind the “deadball” debate.
         </p>
         <p className="text-base text-neutral-700 mb-4">
-          In this module, you’ll learn how angles, distances, and trajectories shape every batted ball. We’ll use real Statcast data and MLB examples to show how geometry explains why some balls leave the park and others fall short.
+          In this module, you&apos;ll learn how angles, distances, and trajectories shape every batted ball. We&apos;ll use real Statcast data and MLB examples to show how geometry explains why some balls leave the park and others fall short.
         </p>
       </section>
       <section className="mb-8">
@@ -24,7 +24,7 @@ export default function GeometryIntro() {
         </ul>
       </section>
       <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-2 text-black">What You'll Learn</h2>
+        <h2 className="text-2xl font-bold mb-2 text-black">What You&apos;ll Learn</h2>
         <ul className="list-disc pl-6 text-base text-neutral-700 mb-4">
           <li>How to calculate launch angle, distance, and apex</li>
           <li>How field geometry and ballpark design affect the game</li>

@@ -24,10 +24,10 @@ export default function OutfieldWallQuirksLesson() {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-2">Step-by-Step Example: Ball Path to Clear the Green Monster</h2>
         <p className="text-base text-neutral-700 mb-4">
-          Fenway Park’s Green Monster is 37 feet high and 310 feet from home plate. What is the minimum distance the ball must travel (in the air) to clear the wall, assuming it travels in a straight line from home plate to the top of the wall?
+          Fenway Park&apos;s Green Monster is 37 feet high and 310 feet from home plate. What is the minimum distance the ball must travel (in the air) to clear the wall, assuming it travels in a straight line from home plate to the top of the wall?
         </p>
         <p className="text-base text-neutral-700 mb-4">
-          <b>Why is this a right triangle?</b> The horizontal distance from home plate to the wall and the vertical height of the wall meet at a right angle. The ball's path forms the hypotenuse, making this a classic right triangle problem.
+          <b>Why is this a right triangle?</b> The horizontal distance from home plate to the wall and the vertical height of the wall meet at a right angle. The ball&apos;s path forms the hypotenuse, making this a classic right triangle problem.
         </p>
         <ul className="list-disc pl-6 text-base text-neutral-700 mb-4">
           <li><b>Wall height (vertical):</b> 37 ft</li>
@@ -44,7 +44,7 @@ export default function OutfieldWallQuirksLesson() {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-2">Practice & Exploration</h2>
         <ul className="list-disc pl-6 text-base text-neutral-700 mb-4">
-          <li>Yankee Stadium’s right field wall is 8 feet high and 314 feet from home plate. What is the minimum ball path needed to clear the wall?</li>
+          <li>Yankee Stadium&apos;s right field wall is 8 feet high and 314 feet from home plate. What is the minimum ball path needed to clear the wall?</li>
           <li>Suppose a ball is hit 320 feet and reaches a height of 10 feet at the wall. Will it clear the right field wall at Yankee Stadium? What about the Green Monster?</li>
           <li>Draw a diagram of two parks with different wall heights and distances. Label the minimum ball path needed for a home run at each wall.</li>
         </ul>

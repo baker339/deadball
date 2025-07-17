@@ -16,7 +16,7 @@ export default function FieldLayoutLesson() {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-2">1. The Baseball Diamond: Infield Basics</h2>
         <p className="text-base text-neutral-700 mb-4">
-          The infield is a perfect square, called the "diamond," with each side measuring <b>90 feet</b>. The four corners are home plate, first base, second base, and third base. The pitcher’s mound is 60 feet 6 inches from home plate. The bases are arranged counterclockwise.
+          The infield is a perfect square, called the &quot;diamond,&quot; with each side measuring <b>90 feet</b>. The four corners are home plate, first base, second base, and third base. The pitcher’s mound is 60 feet 6 inches from home plate. The bases are arranged counterclockwise.
         </p>
         <div className="flex justify-center my-6">
           {/* SVG Diagram: Accurate Baseball Diamond, base labels higher and outward */}
@@ -193,7 +193,7 @@ export default function FieldLayoutLesson() {
           <li>Wall height: No official minimum or maximum</li>
         </ul>
         <p className="text-base text-neutral-700 mb-4">
-          Parks built before 1958 (like Fenway) are "grandfathered" and can have shorter distances.
+          Parks built before 1958 (like Fenway) are &quot;grandfathered&quot; and can have shorter distances.
         </p>
       </section>
       <section className="mb-8">
