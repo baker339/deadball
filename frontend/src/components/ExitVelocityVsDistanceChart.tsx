@@ -2,6 +2,9 @@
 
 import React, { useState, useMemo } from "react";
 import { useCachedAPI } from '../hooks/useCachedData';
+import dynamic from 'next/dynamic';
+
+const Plot: any = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 interface ExitVelocityData {
   launch_speed: number;
@@ -16,9 +19,6 @@ interface ExitVelocityVsDistanceChartProps {
 }
 
 export default function ExitVelocityVsDistanceChart({ sampleSize = 1000 }: ExitVelocityVsDistanceChartProps) {
-  // Dynamically require Plotly only on the client
-  const Plot = typeof window !== "undefined" ? require("react-plotly.js").default : null;
-
   // Use cached API hook
   const { data, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<ExitVelocityData[]>(
     '/exit_velocity_distance',
@@ -54,10 +54,10 @@ export default function ExitVelocityVsDistanceChart({ sampleSize = 1000 }: ExitV
     : data;
 
   // Prepare data for Plotly 3D scatter
-  const x = sampled.map((d: any) => d.launch_speed);
-  const y = sampled.map((d: any) => d.hit_distance_sc);
-  const z = sampled.map((d: any) => d.launch_angle);
-  const color = sampled.map((d: any) => d.hit_distance_sc > 350 ? 'red' : 'blue');
+  const x = sampled.map((d) => d.launch_speed);
+  const y = sampled.map((d) => d.hit_distance_sc);
+  const z = sampled.map((d) => d.launch_angle);
+  const color = sampled.map((d) => d.hit_distance_sc > 350 ? 'red' : 'blue');
 
   const plotData = [
     {

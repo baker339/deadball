@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { cacheManager, cacheUtils, CacheConfig } from '../utils/cache';
 
-interface UseCachedDataOptions {
+interface UseCachedDataOptions<T> {
   cacheKey: string;
   cacheConfig?: Partial<CacheConfig>;
-  fetchFunction: () => Promise<any>;
-  dependencies?: any[];
+  fetchFunction: () => Promise<T>;
+  dependencies?: unknown[];
   skipCache?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
 }
 
@@ -32,7 +32,7 @@ export function useCachedData<T>({
   skipCache = false,
   onSuccess,
   onError
-}: UseCachedDataOptions): UseCachedDataReturn<T> {
+}: UseCachedDataOptions<T>): UseCachedDataReturn<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -84,6 +84,7 @@ export function useCachedData<T>({
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
   return {
@@ -99,8 +100,8 @@ export function useCachedData<T>({
 // Convenience hook for API endpoints
 export function useCachedAPI<T>(
   endpoint: string,
-  params: Record<string, any> = {},
-  options: Partial<UseCachedDataOptions> = {}
+  params: Record<string, string | number | boolean> = {},
+  options: Partial<UseCachedDataOptions<T>> = {}
 ): UseCachedDataReturn<T> {
   const cacheKey = cacheUtils.createKeyFromParams(endpoint, params);
   

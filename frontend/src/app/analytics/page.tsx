@@ -1,16 +1,30 @@
 "use client";
 import React, { useMemo } from 'react';
 import { useCachedAPI } from '../../hooks/useCachedData';
+import dynamic from 'next/dynamic';
+
+interface DragVsHR {
+  drag_coefficient: number;
+  home_runs: number;
+}
+
+interface EvDist {
+  launch_speed: number;
+  launch_angle: number;
+  hit_distance_sc: number;
+}
+
+const Plot: any = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 export default function AnalyticsPage() {
   // Correlation Analysis Data
-  const { data: dragVsHR, loading: loadingCorr, error: errorCorr } = useCachedAPI<any[]>(
+  const { data: dragVsHR, loading: loadingCorr, error: errorCorr } = useCachedAPI<DragVsHR[]>(
     '/drag_vs_hr',
     { granularity: 'month' }
   );
 
   // Home Run Probability Data
-  const { data: evDist, loading: loadingProb, error: errorProb } = useCachedAPI<any[]>(
+  const { data: evDist, loading: loadingProb, error: errorProb } = useCachedAPI<EvDist[]>(
     '/exit_velocity_distance',
     { sampleSize: 2000 }
   );
@@ -18,8 +32,8 @@ export default function AnalyticsPage() {
   // Calculate correlation and trendline for drag vs HR
   const corrResult = useMemo(() => {
     if (!dragVsHR || dragVsHR.length < 2) return null;
-    const xs = dragVsHR.map((d: any) => d.drag_coefficient);
-    const ys = dragVsHR.map((d: any) => d.home_runs);
+    const xs = dragVsHR.map((d) => d.drag_coefficient);
+    const ys = dragVsHR.map((d) => d.home_runs);
     const n = xs.length;
     const xMean = xs.reduce((a: number, b: number) => a + b, 0) / n;
     const yMean = ys.reduce((a: number, b: number) => a + b, 0) / n;
@@ -39,7 +53,7 @@ export default function AnalyticsPage() {
     if (!evDist) return null;
     // Bin by exit velocity and launch angle
     const bins: Record<string, { count: number; hr: number }> = {};
-    evDist.forEach((d: any) => {
+    evDist.forEach((d) => {
       const ev = Math.round(d.launch_speed);
       const la = Math.round(d.launch_angle);
       const key = `${ev}_${la}`;
@@ -49,18 +63,15 @@ export default function AnalyticsPage() {
       if (d.hit_distance_sc > 350) bins[key].hr++;
     });
     // Prepare grid
-    const evs = Array.from(new Set(evDist.map((d: any) => Math.round(d.launch_speed)))).sort((a: number, b: number) => a - b);
-    const las = Array.from(new Set(evDist.map((d: any) => Math.round(d.launch_angle)))).sort((a: number, b: number) => a - b);
-    const z: (number | null)[][] = las.map((la: number) => evs.map((ev: number) => {
+    const evs = Array.from(new Set(evDist.map((d) => Math.round(d.launch_speed)))).sort((a, b) => a - b);
+    const las = Array.from(new Set(evDist.map((d) => Math.round(d.launch_angle)))).sort((a, b) => a - b);
+    const z: (number | null)[][] = las.map((la) => evs.map((ev) => {
       const bin = bins[`${ev}_${la}`];
       if (!bin || bin.count < 3) return null;
       return bin.hr / bin.count;
     }));
     return { evs, las, z };
   }, [evDist]);
-
-  // Dynamically require Plotly only on the client
-  const Plot = typeof window !== 'undefined' ? require('react-plotly.js').default : null;
 
   return (
     <main className="max-w-6xl mx-auto py-10 px-4">
@@ -83,38 +94,36 @@ export default function AnalyticsPage() {
           ) : errorCorr ? (
             <div className="text-center text-red-500">Error: {errorCorr}</div>
           ) : corrResult ? (
-            Plot && (
-              <Plot
-                data={[
-                  {
-                    x: corrResult.xs,
-                    y: corrResult.ys,
-                    mode: 'markers',
-                    type: 'scatter',
-                    name: 'Data',
-                    marker: { color: '#3b82f6', size: 8, opacity: 0.7 },
-                    hovertemplate: 'Drag: %{x:.3f}<br>HRs: %{y}<extra></extra>',
-                  },
-                  {
-                    x: corrResult.xs,
-                    y: corrResult.trend,
-                    mode: 'lines',
-                    name: 'Trendline',
-                    line: { color: '#16a34a', width: 3, dash: 'dot' },
-                  },
-                ]}
-                layout={{
-                  title: `Drag Coefficient vs Home Runs (R² = ${corrResult.r2.toFixed(2)})`,
-                  xaxis: { title: 'Drag Coefficient', range: [0.12, 0.25] },
-                  yaxis: { title: 'Home Runs' },
-                  height: 400,
-                  margin: { l: 60, r: 30, b: 60, t: 60 },
-                  legend: { x: 0.02, y: 0.98 },
-                }}
-                config={{ displayModeBar: false }}
-                style={{ width: '100%', height: '400px' }}
-              />
-            )
+            <Plot
+              data={[
+                {
+                  x: corrResult.xs,
+                  y: corrResult.ys,
+                  mode: 'markers',
+                  type: 'scatter',
+                  name: 'Data',
+                  marker: { color: '#3b82f6', size: 8, opacity: 0.7 },
+                  hovertemplate: 'Drag: %{x:.3f}<br>HRs: %{y}<extra></extra>',
+                },
+                {
+                  x: corrResult.xs,
+                  y: corrResult.trend,
+                  mode: 'lines',
+                  name: 'Trendline',
+                  line: { color: '#16a34a', width: 3, dash: 'dot' },
+                },
+              ]}
+              layout={{
+                title: `Drag Coefficient vs Home Runs (R² = ${corrResult.r2.toFixed(2)})`,
+                xaxis: { title: 'Drag Coefficient', range: [0.12, 0.25] },
+                yaxis: { title: 'Home Runs' },
+                height: 400,
+                margin: { l: 60, r: 30, b: 60, t: 60 },
+                legend: { x: 0.02, y: 0.98 },
+              }}
+              config={{ displayModeBar: false }}
+              style={{ width: '100%', height: '400px' }}
+            />
           ) : (
             <div className="text-center text-gray-500">Not enough data</div>
           )}

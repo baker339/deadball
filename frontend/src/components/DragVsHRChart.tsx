@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
   Filler,
+  TooltipItem,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useCachedAPI } from '../hooks/useCachedData';
@@ -105,19 +106,19 @@ export default function DragVsHRChart({ granularity = 'month' }: DragVsHRChartPr
       },
       tooltip: {
         callbacks: {
-          title: (context: any) => {
+          title: (context: TooltipItem<'line'>[]) => {
             return `Date: ${context[0].label}`;
           },
-          label: (context: any) => {
+          label: (context: TooltipItem<'line'>) => {
             if (context.dataset.label === 'Drag Coefficient') {
               return `Drag Coefficient: ${context.parsed.y.toFixed(3)} (Lower = less air resistance)`;
             } else {
               return `Home Runs: ${context.parsed.y}`;
             }
           },
-          afterBody: (context: any) => {
-            const dragPoint = context.find((c: any) => c.dataset.label === 'Drag Coefficient');
-            const hrPoint = context.find((c: any) => c.dataset.label === 'Home Runs');
+          afterBody: (context: TooltipItem<'line'>[]) => {
+            const dragPoint = context.find((c) => c.dataset.label === 'Drag Coefficient');
+            const hrPoint = context.find((c) => c.dataset.label === 'Home Runs');
             
             if (dragPoint && hrPoint) {
               const dragValue = dragPoint.parsed.y;

@@ -11,6 +11,10 @@ import {
   Tooltip,
   Legend,
   Filler,
+  TooltipItem,
+  ScriptableContext,
+  Tick,
+  ScriptableScaleContext,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useCachedAPI } from '../hooks/useCachedData';
@@ -149,10 +153,10 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
       },
       tooltip: {
         callbacks: {
-          title: (context: any) => {
+          title: (context: TooltipItem<'line'>[]) => {
             return `Date: ${context[0].label}`;
           },
-          label: (context: any) => {
+          label: (context: TooltipItem<'line'>) => {
             const percentage = context.parsed.y;
             if (metricType === 'efficiency') {
               let state = '';
@@ -174,7 +178,7 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
               return `Historical Comparison: ${percentage.toFixed(1)}% (${state})`;
             }
           },
-          afterBody: (context: any) => {
+          afterBody: (context: TooltipItem<'line'>[]) => {
             const percentage = context[0].parsed.y;
             if (metricType === 'efficiency') {
               let interpretation = '';
@@ -238,7 +242,7 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
         min: 0,
         max: 100,
         ticks: {
-          callback: function(value: any) {
+          callback: function(value: number | string) {
             if (metricType === 'efficiency') {
               if (value === 50) return '50% (Moderate)';
               if (value === 0) return '0% (Very Inefficient)';
@@ -252,15 +256,15 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
           }
         },
         grid: {
-          color: function(context: any) {
-            if (context.tick.value === 50) {
-              return 'rgba(0, 0, 0, 0.3)'; // Darker line for center axis
+          color: function(ctx: ScriptableScaleContext) {
+            if (typeof ctx.tick === 'object' && ctx.tick && 'value' in ctx.tick && ctx.tick.value === 50) {
+              return 'rgba(0, 0, 0, 0.3)';
             }
             return 'rgba(0, 0, 0, 0.1)';
           },
-          lineWidth: function(context: any) {
-            if (context.tick.value === 50) {
-              return 2; // Thicker line for center axis
+          lineWidth: function(ctx: ScriptableScaleContext) {
+            if (typeof ctx.tick === 'object' && ctx.tick && 'value' in ctx.tick && ctx.tick.value === 50) {
+              return 2;
             }
             return 1;
           }

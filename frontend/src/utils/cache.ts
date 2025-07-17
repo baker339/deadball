@@ -127,7 +127,7 @@ class CacheManager {
     }
   }
 
-  getCacheInfo(key: string): { exists: boolean; age: number | null; size: number | null } {
+  getCacheInfo<T>(key: string): { exists: boolean; age: number | null; size: number | null } {
     if (!this.isLocalStorageAvailable()) {
       return { exists: false, age: null, size: null };
     }
@@ -140,7 +140,7 @@ class CacheManager {
         return { exists: false, age: null, size: null };
       }
 
-      const entry: CacheEntry<any> = JSON.parse(cached);
+      const entry: CacheEntry<T> = JSON.parse(cached);
       const age = Date.now() - entry.timestamp;
       const size = new Blob([cached]).size;
 
@@ -177,7 +177,7 @@ export const cacheUtils = {
   },
 
   // Helper to create cache key from URL parameters
-  createKeyFromParams: (baseKey: string, params: Record<string, any>): string => {
+  createKeyFromParams: (baseKey: string, params: Record<string, string | number | boolean>): string => {
     const sortedParams = Object.keys(params)
       .sort()
       .map(key => `${key}=${params[key]}`)
