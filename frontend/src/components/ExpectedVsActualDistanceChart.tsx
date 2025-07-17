@@ -10,6 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  Chart,
+  Plugin,
+  TooltipItem,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useCachedAPI } from '../hooks/useCachedData';
@@ -31,9 +34,9 @@ interface HitData {
 }
 
 // Custom plugin for dumbbell chart effect
-const dumbbellPlugin = {
+const dumbbellPlugin: Plugin<'line'> = {
   id: "dumbbell",
-  afterDraw: (chart: any) => {
+  afterDraw: (chart) => {
     const ctx = chart.ctx;
     const meta0 = chart.getDatasetMeta(0);
     const meta1 = chart.getDatasetMeta(1);
@@ -45,7 +48,6 @@ const dumbbellPlugin = {
     for (let i = 0; i < meta0.data.length; i++) {
       const point0 = meta0.data[i];
       const point1 = meta1.data[i];
-      
       if (point0 && point1) {
         ctx.beginPath();
         ctx.moveTo(point0.x, point0.y);
@@ -59,7 +61,7 @@ const dumbbellPlugin = {
 
 export default function ExpectedVsActualDistanceChart() {
   // Use cached API hook
-  const { data, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<HitData[]>(
+  const { data, loading, error, lastFetch, cacheInfo } = useCachedAPI<HitData[]>(
     '/expected_vs_actual_distance'
   );
 
@@ -143,26 +145,24 @@ export default function ExpectedVsActualDistanceChart() {
       },
       tooltip: {
         callbacks: {
-          title: (context: any) => {
+          title: (context: TooltipItem<'line'>[]) => {
             return `Month: ${context[0].label}`;
           },
-          label: (context: any) => {
+          label: (context: TooltipItem<'line'>) => {
             if (context.dataset.label === "Expected Distance (Vacuum)") {
               return `Expected: ${context.parsed.y.toFixed(1)} ft (no air resistance)`;
             } else {
               return `Actual: ${context.parsed.y.toFixed(1)} ft (with air resistance)`;
             }
           },
-          afterBody: (context: any) => {
-            const expectedPoint = context.find((c: any) => c.dataset.label === "Expected Distance (Vacuum)");
-            const actualPoint = context.find((c: any) => c.dataset.label === "Actual Distance");
-            
+          afterBody: (context: TooltipItem<'line'>[]) => {
+            const expectedPoint = context.find((c) => c.dataset.label === "Expected Distance (Vacuum)");
+            const actualPoint = context.find((c) => c.dataset.label === "Actual Distance");
             if (expectedPoint && actualPoint) {
               const expected = expectedPoint.parsed.y;
               const actual = actualPoint.parsed.y;
               const difference = expected - actual;
               const percentage = (difference / expected) * 100;
-              
               return [
                 '',
                 `Difference: ${difference.toFixed(1)} ft`,
