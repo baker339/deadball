@@ -105,7 +105,8 @@ export function useCachedAPI<T>(
   const cacheKey = cacheUtils.createKeyFromParams(endpoint, params);
   
   const fetchFunction = async (): Promise<T> => {
-    const url = new URL(`http://localhost:8000${endpoint}`);
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
+    const url = new URL(`${baseUrl}${endpoint}`);
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         url.searchParams.append(key, String(value));
