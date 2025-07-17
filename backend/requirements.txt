@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pybaseball
+pandas
+scikit-learn
+alembic 
+python-dotenv
+psycopg2 
