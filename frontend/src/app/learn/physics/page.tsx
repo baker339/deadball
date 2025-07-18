@@ -191,9 +191,11 @@ export default function PhysicsPage() {
         </section>
       </div>
 
-      <LessonNav 
-        prev={{ href: '/learn/trigonometry', label: 'Trigonometry' }}
-        next={{ href: '/learn/physics/practice', label: 'Physics Practice' }}
+      <LessonNav
+        prevHref="/learn/trigonometry"
+        prevLabel="Trigonometry"
+        nextHref="/learn/physics/practice"
+        nextLabel="Physics Practice"
       />
     </div>
   );
