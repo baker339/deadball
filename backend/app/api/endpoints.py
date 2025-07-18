@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, extract
 from ..models import StatcastEvent, engine
 import numpy as np
+from ..main import CACHE
 
 router = APIRouter()
 
@@ -17,6 +18,9 @@ def get_exit_velocity_distance(
     start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
     end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)")
 ):
+    # Serve from cache if available and using default params
+    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and "exit_velocity_distance" in CACHE:
+        return {"data": CACHE["exit_velocity_distance"]}
     try:
         if end_date is None:
             end_date = date.today().strftime("%Y-%m-%d")
@@ -73,6 +77,9 @@ def get_drag_vs_hr(
     end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)"),
     granularity: str = Query("month", description="Grouping: year, month, week, or day")
 ):
+    # Serve from cache if available and using default params
+    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and granularity == "month" and "drag_vs_hr" in CACHE:
+        return {"data": CACHE["drag_vs_hr"]}
     # Use today's date if no end_date provided
     if end_date is None:
         end_date = date.today().strftime("%Y-%m-%d")
