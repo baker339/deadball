@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import CacheManager from "../components/CacheManager";
+import dynamic from "next/dynamic";
+const CacheManager = dynamic(() => import("../components/CacheManager"), { ssr: false });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
