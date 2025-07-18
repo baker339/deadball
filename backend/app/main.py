@@ -16,15 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global cache for precomputed endpoint responses
-CACHE = {}
+app.state.CACHE = {}
 
 def refresh_cache():
-    # Import endpoint functions directly
     from .api.endpoints import get_exit_velocity_distance, get_drag_vs_hr
-    # Precompute and store responses (use default params or adjust as needed)
-    CACHE["exit_velocity_distance"] = get_exit_velocity_distance()["data"]
-    CACHE["drag_vs_hr"] = get_drag_vs_hr()["data"]
+    app.state.CACHE["exit_velocity_distance"] = get_exit_velocity_distance.__wrapped__()["data"]
+    app.state.CACHE["drag_vs_hr"] = get_drag_vs_hr.__wrapped__()["data"]
     # Add more as needed
 
 @app.on_event("startup")

@@ -1,11 +1,10 @@
 import pandas as pd
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Request
 from datetime import datetime, date
 from sqlalchemy.orm import Session
 from sqlalchemy import func, extract
 from ..models import StatcastEvent, engine
 import numpy as np
-from ..main import CACHE
 
 router = APIRouter()
 
@@ -15,12 +14,14 @@ def get_aggregates():
 
 @router.get("/exit_velocity_distance")
 def get_exit_velocity_distance(
+    request: Request,
     start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
     end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)")
 ):
+    cache = request.app.state.CACHE
     # Serve from cache if available and using default params
-    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and "exit_velocity_distance" in CACHE:
-        return {"data": CACHE["exit_velocity_distance"]}
+    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and "exit_velocity_distance" in cache:
+        return {"data": cache["exit_velocity_distance"]}
     try:
         if end_date is None:
             end_date = date.today().strftime("%Y-%m-%d")
@@ -73,13 +74,15 @@ def get_trig_explorer():
 
 @router.get("/drag_vs_hr")
 def get_drag_vs_hr(
+    request: Request,
     start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
     end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)"),
     granularity: str = Query("month", description="Grouping: year, month, week, or day")
 ):
+    cache = request.app.state.CACHE
     # Serve from cache if available and using default params
-    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and granularity == "month" and "drag_vs_hr" in CACHE:
-        return {"data": CACHE["drag_vs_hr"]}
+    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and granularity == "month" and "drag_vs_hr" in cache:
+        return {"data": cache["drag_vs_hr"]}
     # Use today's date if no end_date provided
     if end_date is None:
         end_date = date.today().strftime("%Y-%m-%d")
