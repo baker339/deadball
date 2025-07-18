@@ -78,6 +78,10 @@ export default function CacheManager() {
   const totalSize = cacheInfos.reduce((sum, info) => sum + (info.size || 0), 0);
   const cachedCount = cacheInfos.filter(info => info.exists).length;
 
+  // Only show Cache Manager if running locally
+  const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  if (!isLocalhost) return null;
+
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <button
