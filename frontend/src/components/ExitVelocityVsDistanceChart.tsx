@@ -16,14 +16,21 @@ interface ExitVelocityData {
 
 interface ExitVelocityVsDistanceChartProps {
   sampleSize?: number;
+  onLoaded?: () => void;
 }
 
-export default function ExitVelocityVsDistanceChart({ sampleSize = 1000 }: ExitVelocityVsDistanceChartProps) {
+export default function ExitVelocityVsDistanceChart({ sampleSize = 1000, onLoaded }: ExitVelocityVsDistanceChartProps) {
   // Use cached API hook
   const { data, loading, error, lastFetch, cacheInfo } = useCachedAPI<ExitVelocityData[]>(
     '/exit_velocity_distance',
     { sampleSize }
   );
+
+  React.useEffect(() => {
+    if (!loading && !error && onLoaded) {
+      onLoaded();
+    }
+  }, [loading, error, onLoaded]);
 
   if (loading) {
     return (

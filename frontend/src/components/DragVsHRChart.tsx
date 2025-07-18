@@ -35,9 +35,10 @@ interface DragVsHRData {
 
 interface DragVsHRChartProps {
   granularity?: 'year' | 'month' | 'week' | 'day';
+  onLoaded?: () => void;
 }
 
-export default function DragVsHRChart({ granularity = 'month' }: DragVsHRChartProps) {
+export default function DragVsHRChart({ granularity = 'month', onLoaded }: DragVsHRChartProps) {
   const [showPostseason, setShowPostseason] = useState(false);
 
   // Use cached API hook
@@ -177,6 +178,12 @@ export default function DragVsHRChart({ granularity = 'month' }: DragVsHRChartPr
       },
     },
   }), [granularity]);
+
+  React.useEffect(() => {
+    if (!loading && !error && onLoaded) {
+      onLoaded();
+    }
+  }, [loading, error, onLoaded]);
 
   if (loading) {
     return (

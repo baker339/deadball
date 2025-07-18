@@ -36,13 +36,14 @@ interface JuicedVsDeadData {
 
 interface JuicedVsDeadBallChartProps {
   granularity?: 'year' | 'month' | 'week' | 'day';
+  onLoaded?: () => void;
 }
 
 // Known juiced/dead ball period baselines
 const JUICED_BALL_2019 = 0.15; // 2019 was very juiced
 const DEAD_BALL_2021 = 0.22;   // 2021 was deadened
 
-export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedVsDeadBallChartProps) {
+export default function JuicedVsDeadBallChart({ granularity = 'month', onLoaded }: JuicedVsDeadBallChartProps) {
   const [showPostseason, setShowPostseason] = useState(false);
   const [metricType, setMetricType] = useState<'efficiency' | 'historical'>('efficiency');
 
@@ -51,6 +52,12 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
     '/drag_vs_hr',
     { granularity }
   );
+
+  React.useEffect(() => {
+    if (!loading && !error && onLoaded) {
+      onLoaded();
+    }
+  }, [loading, error, onLoaded]);
 
   // Calculate Distance Efficiency Index (how much distance is lost to drag)
   const calculateDistanceEfficiency = (dragCoefficient: number): number => {
