@@ -17,41 +17,47 @@ def get_exit_velocity_distance(
     start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
     end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)")
 ):
-    if end_date is None:
-        end_date = date.today().strftime("%Y-%m-%d")
-    start_dt = datetime.strptime(start_date, "%Y-%m-%d").date()
-    end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
+    try:
+        if end_date is None:
+            end_date = date.today().strftime("%Y-%m-%d")
+        start_dt = datetime.strptime(start_date, "%Y-%m-%d").date()
+        end_dt = datetime.strptime(end_date, "%Y-%m-%d").date()
 
-    with Session(engine) as session:
-        query = session.query(
-            StatcastEvent.game_date,
-            StatcastEvent.launch_speed,
-            StatcastEvent.launch_angle,
-            StatcastEvent.hit_distance_sc,
-            StatcastEvent.bb_type,
-            StatcastEvent.drag_coefficient
-        ).filter(
-            StatcastEvent.game_date >= start_dt,
-            StatcastEvent.game_date <= end_dt,
-            StatcastEvent.launch_speed != None,
-            StatcastEvent.launch_angle != None,
-            StatcastEvent.hit_distance_sc != None,
-            StatcastEvent.bb_type != None,
-            StatcastEvent.drag_coefficient.isnot(None)
-        )
-        df = pd.read_sql(query.statement, session.bind)
+        with Session(engine) as session:
+            query = session.query(
+                StatcastEvent.game_date,
+                StatcastEvent.launch_speed,
+                StatcastEvent.launch_angle,
+                StatcastEvent.hit_distance_sc,
+                StatcastEvent.bb_type,
+                StatcastEvent.drag_coefficient
+            ).filter(
+                StatcastEvent.game_date >= start_dt,
+                StatcastEvent.game_date <= end_dt,
+                StatcastEvent.launch_speed != None,
+                StatcastEvent.launch_angle != None,
+                StatcastEvent.hit_distance_sc != None,
+                StatcastEvent.bb_type != None,
+                StatcastEvent.drag_coefficient.isnot(None)
+            )
+            df = pd.read_sql(query.statement, session.bind)
 
-    if df.empty:
-        return {"data": []}
+        if df.empty:
+            return {"data": []}
 
-    # Drop any rows where drag_coefficient is null or NaN (defensive)
-    df = df[df["drag_coefficient"].notnull()]
+        # Drop any rows where drag_coefficient is null or NaN (defensive)
+        df = df[df["drag_coefficient"].notnull()]
 
-    # Replace NaN, inf, -inf with None for JSON serialization
-    df = df.replace([np.nan, np.inf, -np.inf], None)
+        # Replace NaN, inf, -inf with None for JSON serialization
+        df = df.replace([np.nan, np.inf, -np.inf], None)
 
-    # Return all batted balls as list of dicts
-    return {"data": df.to_dict(orient="records")}
+        # Return all batted balls as list of dicts
+        return {"data": df.to_dict(orient="records")}
+    except Exception as e:
+        import traceback
+        print("Error in /exit_velocity_distance:", e)
+        traceback.print_exc()
+        return {"error": str(e)}, 500
 
 @router.get("/timeline")
 def get_timeline():
