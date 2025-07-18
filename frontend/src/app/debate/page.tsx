@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Debate() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-16 text-neutral-900 font-sans">
@@ -41,7 +43,7 @@ export default function Debate() {
         </p>
       </section>
       <div className="mt-12 text-center">
-        <a href="/" className="text-sm text-neutral-500 underline hover:text-black">← Back to Home</a>
+        <Link href="/" className="text-sm text-neutral-500 underline hover:text-black">← Back to Home</Link>
       </div>
     </main>
   );

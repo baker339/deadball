@@ -10,7 +10,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  Chart,
   Plugin,
   TooltipItem,
 } from "chart.js";

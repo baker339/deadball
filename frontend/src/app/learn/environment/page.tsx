@@ -56,14 +56,14 @@ export default function EnvironmentPage() {
             </p>
             <div className="bg-yellow-50 p-4 rounded-lg">
               <p className="text-sm text-yellow-800">
-                <strong>Rule of Thumb:</strong> For every 10°F increase in temperature, a baseball travels approximately 2-3 feet farther.
+                <strong>Rule of Thumb:</strong> For every 10&deg;F increase in temperature, a baseball travels approximately 2-3 feet farther.
               </p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div>
-              <h3 className="font-semibold mb-2">Cold Weather (40°F)</h3>
+              <h3 className="font-semibold mb-2">Cold Weather (40&deg;F)</h3>
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Higher air density</li>
                 <li>• More drag on the ball</li>
@@ -73,7 +73,7 @@ export default function EnvironmentPage() {
             </div>
             
             <div>
-              <h3 className="font-semibold mb-2">Hot Weather (90°F)</h3>
+              <h3 className="font-semibold mb-2">Hot Weather (90&deg;F)</h3>
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Lower air density</li>
                 <li>• Less drag on the ball</li>
@@ -85,7 +85,7 @@ export default function EnvironmentPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">Altitude and "Thin Air"</h2>
+          <h2 className="text-2xl font-semibold mb-4">Altitude and &quot;Thin Air&quot;</h2>
           
           <p className="mb-4">
             Higher altitudes have lower atmospheric pressure, resulting in less dense air and longer ball flight.
@@ -94,7 +94,7 @@ export default function EnvironmentPage() {
           <div className="bg-red-50 p-6 rounded-lg mb-6">
             <h3 className="font-semibold text-red-800 mb-2">Coors Field Effect</h3>
             <p className="text-sm text-red-700 mb-3">
-              Coors Field in Denver (5,280 feet elevation) is famous for its "thin air" effect on baseball flight.
+              Coors Field in Denver (5,280 feet elevation) is famous for its &quot;thin air&quot; effect on baseball flight.
             </p>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
@@ -242,7 +242,7 @@ export default function EnvironmentPage() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Ballpark Design</h3>
               <p className="text-sm text-gray-600">
-                Teams consider local climate when designing ballparks. Coors Field's large outfield 
+                Teams consider local climate when designing ballparks. Coors Field&apos;s large outfield 
                 compensates for the altitude effect.
               </p>
             </div>
@@ -258,7 +258,7 @@ export default function EnvironmentPage() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">Player Performance</h3>
               <p className="text-sm text-gray-600">
-                Players' statistics can vary significantly between home and away games due to 
+                Players&apos; statistics can vary significantly between home and away games due to 
                 environmental differences between ballparks.
               </p>
             </div>

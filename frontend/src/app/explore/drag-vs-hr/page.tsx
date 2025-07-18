@@ -13,7 +13,7 @@ export default function DragVsHRPage() {
       </div>
       <h2 className="text-2xl font-bold mb-4">Expected vs Actual Home Run Distance (Raw Hits)</h2>
       <p className="text-base text-gray-600 mb-8">
-        This scatter plot shows, for every qualifying hit, the expected distance (in a vacuum, no drag) vs the actual distance measured by Statcast. This visualizes the effect of drag and the "juiced" or "dead" ball debate at the most granular level.
+        This scatter plot shows, for every qualifying hit, the expected distance (in a vacuum, no drag) vs the actual distance measured by Statcast. This visualizes the effect of drag and the &quot;juiced&quot; or &quot;dead&quot; ball debate at the most granular level.
       </p>
       <ExpectedVsActualDistanceChart />
     </main>

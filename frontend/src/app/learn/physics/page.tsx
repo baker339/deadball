@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import LessonNav from '@/components/LessonNav';
 import { EquationBlock } from '@/components/EquationBlock';
 
@@ -38,21 +37,21 @@ export default function PhysicsPage() {
             <div className="bg-red-50 p-4 rounded-lg">
               <h3 className="font-semibold text-red-800 mb-2">3. Drag (Air Resistance)</h3>
               <p className="text-sm text-red-700">
-                Opposes the ball's motion through the air. This is what we measure with the drag coefficient.
+                Opposes the ball&apos;s motion through the air. This is what we measure with the drag coefficient.
               </p>
             </div>
             
             <div className="bg-purple-50 p-4 rounded-lg">
               <h3 className="font-semibold text-purple-800 mb-2">4. Lift (Magnus Force)</h3>
               <p className="text-sm text-purple-700">
-                Created by the ball's spin, causing it to curve. This is why pitchers can make the ball move.
+                Created by the ball&apos;s spin, causing it to curve. This is why pitchers can make the ball move.
               </p>
             </div>
           </div>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">Newton's Laws in Action</h2>
+          <h2 className="text-2xl font-semibold mb-4">Newton&apos;s Laws in Action</h2>
           
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-3">First Law: Inertia</h3>
@@ -124,7 +123,7 @@ export default function PhysicsPage() {
             </p>
             <div className="bg-blue-50 p-4 rounded-lg">
               <p className="text-sm text-blue-800">
-                <strong>Example:</strong> When a ball is hit, some of the bat's kinetic energy is transferred to the ball, 
+                <strong>Example:</strong> When a ball is hit, some of the bat&apos;s kinetic energy is transferred to the ball, 
                 while some is lost as heat and sound.
               </p>
             </div>

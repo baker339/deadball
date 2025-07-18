@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LessonNav from "../../../../components/LessonNav";
 import LaunchAngleAnimation from "../../../../components/LaunchAngleAnimation";
 
@@ -13,7 +12,7 @@ export default function LaunchAngleLesson() {
           <h3 className="font-bold text-blue-800 mb-1">Math Toolbox</h3>
           <ul className="list-disc pl-6 text-blue-900 text-base">
             <li><b>Pythagorean Theorem:</b> a² + b² = c² (for right triangles)</li>
-            <li><b>Rise over Run:</b> The ratio of vertical to horizontal change forms the slope of the ball's path</li>
+            <li><b>Rise over Run:</b> The ratio of vertical to horizontal change forms the slope of the ball&apos;s path</li>
             <li><b>Triangle Sides:</b> You can use the lengths of the vertical and horizontal components to construct and measure the launch angle</li>
           </ul>
         </div>
@@ -27,7 +26,7 @@ export default function LaunchAngleLesson() {
         <ul className="list-disc pl-6 text-base text-neutral-700 mb-4">
           <li>The vertical side (rise) is 40 units long</li>
           <li>The horizontal side (run) is 90 units long</li>
-          <li>The hypotenuse is the ball's total exit velocity (use the Pythagorean theorem to find it)</li>
+          <li>The hypotenuse is the ball&apos;s total exit velocity (use the Pythagorean theorem to find it)</li>
         </ul>
         <p className="text-base text-neutral-700 mb-4">
           <b>Find the hypotenuse:</b> c = √(40² + 90²) = √(1600 + 8100) = √9700 ≈ 98.5 mph
@@ -44,7 +43,7 @@ export default function LaunchAngleLesson() {
         <h2 className="text-2xl font-bold mb-2 text-black">Try It Yourself</h2>
         <ul className="list-disc pl-6 text-base text-neutral-700 mb-4">
           <li>A ball leaves the bat with a vertical velocity of 35 mph and a horizontal velocity of 80 mph. Draw the triangle and use the Pythagorean theorem to find the total exit velocity. Estimate the launch angle by measuring or comparing rise/run.</li>
-          <li>If a ball’s vertical velocity is 50 mph and the horizontal velocity is 50 mph, what is the shape of the triangle? What can you say about the launch angle?</li>
+          <li>If a ball&apos;s vertical velocity is 50 mph and the horizontal velocity is 50 mph, what is the shape of the triangle? What can you say about the launch angle?</li>
           <li>Find a Statcast highlight and try to sketch the triangle for the launch angle using the data provided.</li>
         </ul>
       </section>

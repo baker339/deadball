@@ -50,14 +50,14 @@ export default function LearnOverview() {
               </ul>
             </Link>
           </li>
-          <li><a href="/learn/exit-velocity" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">4. Exit Velocity & Home Run Probability</span><br /><span className="text-sm text-neutral-600">Exit velocity, distance, and home run odds</span></a></li>
-          <li><a href="/learn/environment" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">5. Environmental Factors</span><br /><span className="text-sm text-neutral-600">Air density, wind, temperature, and weather effects</span></a></li>
-          <li><a href="/learn/data-visualization" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">6. Data Analysis & Visualization</span><br /><span className="text-sm text-neutral-600">Reading Statcast charts, scatterplots, and more</span></a></li>
-          <li><a href="/learn/practice" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">7. Practice & Mastery</span><br /><span className="text-sm text-neutral-600">Mixed questions and challenge mode</span></a></li>
+          <li><Link href="/learn/exit-velocity" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">4. Exit Velocity & Home Run Probability</span><br /><span className="text-sm text-neutral-600">Exit velocity, distance, and home run odds</span></Link></li>
+          <li><Link href="/learn/environment" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">5. Environmental Factors</span><br /><span className="text-sm text-neutral-600">Air density, wind, temperature, and weather effects</span></Link></li>
+          <li><Link href="/learn/data-visualization" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">6. Data Analysis & Visualization</span><br /><span className="text-sm text-neutral-600">Reading Statcast charts, scatterplots, and more</span></Link></li>
+          <li><Link href="/learn/practice" className="block p-4 bg-neutral-50 border border-neutral-200 rounded hover:bg-neutral-100 transition"><span className="font-bold">7. Practice & Mastery</span><br /><span className="text-sm text-neutral-600">Mixed questions and challenge mode</span></Link></li>
         </ul>
       </nav>
       <div className="mt-12 text-center">
-        <a href="/" className="text-sm text-neutral-500 underline hover:text-black">← Back to Home</a>
+        <Link href="/" className="text-sm text-neutral-500 underline hover:text-black">← Back to Home</Link>
       </div>
     </main>
   );

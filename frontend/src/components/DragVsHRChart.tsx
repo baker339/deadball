@@ -41,7 +41,7 @@ export default function DragVsHRChart({ granularity = 'month' }: DragVsHRChartPr
   const [showPostseason, setShowPostseason] = useState(false);
 
   // Use cached API hook
-  const { data, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<DragVsHRData[]>(
+  const { data, loading, error, lastFetch, cacheInfo } = useCachedAPI<DragVsHRData[]>(
     '/drag_vs_hr',
     { granularity }
   );
@@ -122,7 +122,6 @@ export default function DragVsHRChart({ granularity = 'month' }: DragVsHRChartPr
             
             if (dragPoint && hrPoint) {
               const dragValue = dragPoint.parsed.y;
-              const hrValue = hrPoint.parsed.y;
               
               let interpretation = '';
               if (dragValue < 0.3) {

@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import { useCachedAPI } from '../hooks/useCachedData';
+import dynamic from 'next/dynamic';
 
-const Plot = typeof window !== "undefined" ? require("react-plotly.js").default : null;
+const Plot = dynamic(() => import('react-plotly.js'), { ssr: false }) as unknown as typeof import('react-plotly.js');
 
 interface DataPoint {
   release_speed: number;
@@ -14,9 +15,6 @@ interface DataPoint {
   pitch_type?: string; // Added for pitch type filtering
 }
 
-const PITCH_TYPES = [
-  "FF", "SI", "FT", "FC", "SL", "CU", "CH", "KC", "FS", "FO", "KN", "EP", "SC", "SV", "CS", "IN", "PO", "UN"
-];
 const BB_TYPES = [
   { key: "fly_ball", label: "Fly Ball" },
   { key: "line_drive", label: "Line Drive" },
@@ -27,7 +25,6 @@ export default function PitchVsExitVelocityChart() {
   const [showFilters, setShowFilters] = useState(false);
   const [startDate, setStartDate] = useState("2015-01-01");
   const [endDate, setEndDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [selectedPitchTypes, setSelectedPitchTypes] = useState<string[]>([]);
   const [selectedBBTypes, setSelectedBBTypes] = useState<string[]>([]);
   const [minRelease, setMinRelease] = useState(30);
   const [maxRelease, setMaxRelease] = useState(110);
@@ -35,7 +32,7 @@ export default function PitchVsExitVelocityChart() {
   const [maxLaunch, setMaxLaunch] = useState(130);
 
   // Use cached API hook with broad parameters to get all data
-  const { data: rawData, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<DataPoint[]>(
+  const { data: rawData, loading, error, lastFetch, cacheInfo } = useCachedAPI<DataPoint[]>(
     '/pitch_vs_exit_velocity',
     {
       start_date: "2015-01-01",
@@ -56,7 +53,6 @@ export default function PitchVsExitVelocityChart() {
       if (date < startDate || date > endDate) return false;
       if (d.release_speed < minRelease || d.release_speed > maxRelease) return false;
       if (d.launch_speed < minLaunch || d.launch_speed > maxLaunch) return false;
-      if (selectedPitchTypes.length > 0 && (!d.pitch_type || !selectedPitchTypes.includes(d.pitch_type))) return false;
       if (selectedBBTypes.length > 0) {
         if (selectedBBTypes.includes("home_run") && d.events === "home_run") return true;
         if (d.bb_type && selectedBBTypes.includes(d.bb_type) && d.events !== "home_run") return true;
@@ -64,7 +60,7 @@ export default function PitchVsExitVelocityChart() {
       }
       return true;
     });
-  }, [rawData, startDate, endDate, selectedPitchTypes, selectedBBTypes, minRelease, maxRelease, minLaunch, maxLaunch]);
+  }, [rawData, startDate, endDate, selectedBBTypes, minRelease, maxRelease, minLaunch, maxLaunch]);
 
   if (loading) return <div className="flex items-center justify-center h-64">Loading pitch vs exit velocity data...</div>;
   if (error) return <div className="flex items-center justify-center h-64 text-red-600">Error: {error}</div>;

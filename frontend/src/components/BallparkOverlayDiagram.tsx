@@ -60,7 +60,7 @@ const BallparkOverlayDiagram: React.FC = () => {
       {/* Home plate */}
       <polygon points={`${cx-8},${cy} ${cx},${cy-12} ${cx+8},${cy} ${cx},${cy+8}`} fill="#fff" stroke="#222" strokeWidth={2} />
       {/* Outfield walls as polygons */}
-      {parks.map((park, i) => {
+      {parks.map((park) => {
         const path = park.points.map(([r, theta], j) => {
           const [x, y] = polarToSvg(r * scale, theta, cx, cy);
           return `${j === 0 ? "M" : "L"}${x},${y}`;

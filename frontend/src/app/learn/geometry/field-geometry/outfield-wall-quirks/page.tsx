@@ -10,8 +10,8 @@ export default function OutfieldWallQuirksLesson() {
         <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
           <h3 className="font-bold text-blue-800 mb-1">Math Toolbox</h3>
           <ul className="list-disc pl-6 text-blue-900 text-base">
-            <li><b>Right Triangle:</b> A triangle with one 90° angle. In this context, the wall height (vertical), the distance from home plate (horizontal), and the ball's path (hypotenuse) form a right triangle.</li>
-            <li><b>Pythagorean Theorem:</b> a² + b² = c² (for right triangles; use to find the ball's path over the wall)</li>
+            <li><b>Right Triangle:</b> A triangle with one 90° angle. In this context, the wall height (vertical), the distance from home plate (horizontal), and the ball&apos;s path (hypotenuse) form a right triangle.</li>
+            <li><b>Pythagorean Theorem:</b> a² + b² = c² (for right triangles; use to find the ball&apos;s path over the wall)</li>
             <li><b>Wall Area:</b> Area = height × width</li>
             <li><b>Wall Height:</b> The vertical distance a ball must clear to be a home run</li>
             <li><b>Horizontal Distance:</b> The distance from home plate to the wall (varies by park and location)</li>

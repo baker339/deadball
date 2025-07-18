@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { useCachedAPI } from '../hooks/useCachedData';
 import dynamic from 'next/dynamic';
 
-const Plot: any = dynamic(() => import('react-plotly.js'), { ssr: false });
+const Plot = dynamic(() => import('react-plotly.js'), { ssr: false }) as unknown as typeof import('react-plotly.js');
 
 interface ExitVelocityData {
   launch_speed: number;
@@ -20,7 +20,7 @@ interface ExitVelocityVsDistanceChartProps {
 
 export default function ExitVelocityVsDistanceChart({ sampleSize = 1000 }: ExitVelocityVsDistanceChartProps) {
   // Use cached API hook
-  const { data, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<ExitVelocityData[]>(
+  const { data, loading, error, lastFetch, cacheInfo } = useCachedAPI<ExitVelocityData[]>(
     '/exit_velocity_distance',
     { sampleSize }
   );

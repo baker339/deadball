@@ -14,7 +14,7 @@ interface EvDist {
   hit_distance_sc: number;
 }
 
-const Plot: any = dynamic(() => import('react-plotly.js'), { ssr: false });
+const Plot = dynamic(() => import('react-plotly.js'), { ssr: false }) as unknown as typeof import('react-plotly.js');
 
 export default function AnalyticsPage() {
   // Correlation Analysis Data

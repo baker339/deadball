@@ -16,7 +16,7 @@ export default function ExitVelocityPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4">What is Exit Velocity?</h2>
           <p className="mb-4">
-            Exit velocity is the speed of the baseball immediately after it leaves the bat. It's measured in miles per hour (mph) 
+            Exit velocity is the speed of the baseball immediately after it leaves the bat. It&apos;s measured in miles per hour (mph) 
             and is one of the most important factors in determining how far a ball will travel.
           </p>
           
@@ -81,7 +81,7 @@ export default function ExitVelocityPage() {
           <h2 className="text-2xl font-semibold mb-4">Launch Angle: The Perfect Arc</h2>
           
           <p className="mb-4">
-            Launch angle is the vertical angle at which the ball leaves the bat. It's crucial for determining 
+            Launch angle is the vertical angle at which the ball leaves the bat. It&apos;s crucial for determining 
             whether a ball becomes a home run, fly out, or ground ball.
           </p>
 
@@ -170,7 +170,7 @@ export default function ExitVelocityPage() {
           
           <p className="mb-4">
             Barrel rate measures the percentage of batted balls with optimal exit velocity and launch angle combinations.
-            A "barrel" is defined as a batted ball with:
+            A &quot;barrel&quot; is defined as a batted ball with:
           </p>
           
           <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -218,7 +218,7 @@ export default function ExitVelocityPage() {
             <div className="border-l-4 border-purple-500 pl-4">
               <h3 className="font-semibold">Pitching Strategy</h3>
               <p className="text-sm text-gray-600">
-                Pitchers can adjust their approach based on a hitter's exit velocity profile.
+                Pitchers can adjust their approach based on a hitter&apos;s exit velocity profile.
               </p>
             </div>
           </div>

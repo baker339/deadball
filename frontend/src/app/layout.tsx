@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import "./globals.css";
-import { useState } from "react";
 import Navbar from "../components/Navbar";
 import CacheManager from "../components/CacheManager";
 

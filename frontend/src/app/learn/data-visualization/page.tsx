@@ -89,12 +89,12 @@ export default function DataVisualizationPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Correlation vs. Causation</h3>
               <p className="mb-3">
-                Just because two variables move together doesn't mean one causes the other.
+                Just because two variables move together doesn&apos;t mean one causes the other.
               </p>
               <div className="bg-yellow-50 p-4 rounded-lg">
                 <p className="text-sm text-yellow-800">
                   <strong>Example:</strong> Higher drag coefficients correlate with fewer home runs, 
-                  but this doesn't prove the ball construction directly caused the change.
+                  but this doesn&apos;t prove the ball construction directly caused the change.
                 </p>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default function DataVisualizationPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Outliers</h3>
               <p className="mb-3">
-                Extreme values that don't follow the general pattern. Important to identify but not always remove.
+                Extreme values that don&apos;t follow the general pattern. Important to identify but not always remove.
               </p>
               <div className="bg-blue-50 p-4 rounded-lg">
                 <p className="text-sm text-blue-800">
@@ -225,7 +225,7 @@ export default function DataVisualizationPage() {
               <h3 className="font-semibold mb-2">Juiced vs. Dead Ball Analysis</h3>
               <p className="text-sm text-gray-600">
                 Time series charts showing drag coefficients over time help identify when baseballs 
-                were "juiced" or "dead" based on air resistance measurements.
+                were &quot;juiced&quot; or &quot;dead&quot; based on air resistance measurements.
               </p>
             </div>
             
@@ -254,7 +254,7 @@ export default function DataVisualizationPage() {
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">1</div>
               <div>
-                <strong>Check the axes:</strong> Always read the labels and units to understand what's being measured
+                <strong>Check the axes:</strong> Always read the labels and units to understand what&apos;s being measured
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -272,7 +272,7 @@ export default function DataVisualizationPage() {
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold mt-1">4</div>
               <div>
-                <strong>Question assumptions:</strong> Don't assume correlation equals causation
+                <strong>Question assumptions:</strong> Don&apos;t assume correlation equals causation
               </div>
             </div>
             <div className="flex items-start gap-3">

@@ -12,8 +12,6 @@ import {
   Legend,
   Filler,
   TooltipItem,
-  ScriptableContext,
-  Tick,
   ScriptableScaleContext,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -40,10 +38,6 @@ interface JuicedVsDeadBallChartProps {
   granularity?: 'year' | 'month' | 'week' | 'day';
 }
 
-// Historical baseline drag coefficient (you can adjust this based on your data)
-// Based on actual Statcast data: mean ~0.128, median ~0.112, but monthly averages are ~0.18
-const HISTORICAL_BASELINE_DRAG = 0.18;
-
 // Known juiced/dead ball period baselines
 const JUICED_BALL_2019 = 0.15; // 2019 was very juiced
 const DEAD_BALL_2021 = 0.22;   // 2021 was deadened
@@ -53,7 +47,7 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
   const [metricType, setMetricType] = useState<'efficiency' | 'historical'>('efficiency');
 
   // Use cached API hook
-  const { data, loading, error, lastFetch, refetch, cacheInfo } = useCachedAPI<JuicedVsDeadData[]>(
+  const { data, loading, error, lastFetch, cacheInfo } = useCachedAPI<JuicedVsDeadData[]>(
     '/drag_vs_hr',
     { granularity }
   );
@@ -76,7 +70,6 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
     // Compare to known juiced (2019) and dead (2021) ball periods
     // 2019 = 100% juiced, 2021 = 0% juiced
     const juicedDiff = Math.abs(dragCoefficient - JUICED_BALL_2019);
-    const deadDiff = Math.abs(dragCoefficient - DEAD_BALL_2021);
     const totalRange = Math.abs(DEAD_BALL_2021 - JUICED_BALL_2019);
     
     // Calculate percentage: closer to 2019 = more juiced
@@ -202,11 +195,11 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
             } else {
               let interpretation = '';
               if (percentage > 80) {
-                interpretation = 'More juiced than the 2019 "super juiced" ball';
+                interpretation = 'More juiced than the 2019 &quot;super juiced&quot; ball';
               } else if (percentage > 60) {
                 interpretation = 'Similar to or more juiced than 2019 levels';
               } else if (percentage < 20) {
-                interpretation = 'More dead than the 2021 "deadened" ball';
+                interpretation = 'More dead than the 2021 &quot;deadened&quot; ball';
               } else if (percentage < 40) {
                 interpretation = 'Similar to or more dead than 2021 levels';
               } else {
@@ -339,8 +332,8 @@ export default function JuicedVsDeadBallChart({ granularity = 'month' }: JuicedV
             <>
               <strong>Historical Comparison:</strong> Compares current ball performance to known juiced (2019) 
               and dead (2021) ball periods. Values closer to 100% indicate performance similar to the 2019 
-              "super juiced" ball, while values closer to 0% indicate performance similar to the 2021 
-              "deadened" ball.
+              &quot;super juiced&quot; ball, while values closer to 0% indicate performance similar to the 2021 
+              &quot;deadened&quot; ball.
             </>
           )}
         </p>

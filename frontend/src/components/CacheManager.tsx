@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { cacheManager } from '../utils/cache';
 
 interface CacheInfo {
@@ -14,7 +14,7 @@ export default function CacheManager() {
   const [cacheInfos, setCacheInfos] = useState<CacheInfo[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const commonCacheKeys = [
+  const commonCacheKeys = useMemo(() => [
     'drag_vs_hr_month_v2.1',
     'drag_vs_hr_year_v2.1',
     'juiced_vs_dead_month_v2.1',
@@ -22,7 +22,7 @@ export default function CacheManager() {
     'exit_velocity_1000_v2.1',
     'expected_vs_actual_v2.1',
     'pitch_vs_exit_velocity_start_date=2015-01-01&end_date=2025-01-01&min_release_speed=30&max_release_speed=110&min_launch_speed=40&max_launch_speed=130_v2.1'
-  ];
+  ], []);
 
   useEffect(() => {
     if (isOpen) {
@@ -32,7 +32,7 @@ export default function CacheManager() {
       }));
       setCacheInfos(infos);
     }
-  }, [isOpen]);
+  }, [isOpen, commonCacheKeys]);
 
   const clearAllCache = () => {
     if (confirm('Are you sure you want to clear all cached data? This will force fresh data to be loaded on next visit.')) {
