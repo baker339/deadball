@@ -5,23 +5,11 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, extract
 from ..models import StatcastEvent, engine
 import numpy as np
+from typing import Optional
 
 router = APIRouter()
 
-@router.get("/aggregates")
-def get_aggregates():
-    return {"data": "Aggregates endpoint placeholder"}
-
-@router.get("/exit_velocity_distance")
-def get_exit_velocity_distance(
-    request: Request,
-    start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
-    end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)")
-):
-    cache = request.app.state.CACHE
-    # Serve from cache if available and using default params
-    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and "exit_velocity_distance" in cache:
-        return {"data": cache["exit_velocity_distance"]}
+def fetch_exit_velocity_distance_data(start_date: str, end_date: Optional[str]):
     try:
         if end_date is None:
             end_date = date.today().strftime("%Y-%m-%d")
@@ -48,7 +36,7 @@ def get_exit_velocity_distance(
             df = pd.read_sql(query.statement, session.bind)
 
         if df.empty:
-            return {"data": []}
+            return []
 
         # Drop any rows where drag_coefficient is null or NaN (defensive)
         df = df[df["drag_coefficient"].notnull()]
@@ -57,7 +45,26 @@ def get_exit_velocity_distance(
         df = df.replace([np.nan, np.inf, -np.inf], None)
 
         # Return all batted balls as list of dicts
-        return {"data": df.to_dict(orient="records")}
+        return df.to_dict(orient="records")
+    except Exception as e:
+        import traceback
+        print("Error in fetch_exit_velocity_distance_data:", e)
+        traceback.print_exc()
+        return []
+
+@router.get("/exit_velocity_distance")
+def get_exit_velocity_distance(
+    request: Request,
+    start_date: str = Query("2015-01-01", description="Start date in YYYY-MM-DD format"),
+    end_date: str = Query(None, description="End date in YYYY-MM-DD format (defaults to today)")
+):
+    cache = request.app.state.CACHE
+    # Serve from cache if available and using default params
+    if start_date == "2015-01-01" and (end_date is None or end_date == date.today().strftime("%Y-%m-%d")) and "exit_velocity_distance" in cache:
+        return {"data": cache["exit_velocity_distance"]}
+    try:
+        data = fetch_exit_velocity_distance_data(start_date, end_date)
+        return {"data": data}
     except Exception as e:
         import traceback
         print("Error in /exit_velocity_distance:", e)

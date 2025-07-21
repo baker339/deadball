@@ -19,9 +19,8 @@ app.add_middleware(
 app.state.CACHE = {}
 
 def refresh_cache():
-    from .api.endpoints import get_exit_velocity_distance, get_drag_vs_hr
-    app.state.CACHE["exit_velocity_distance"] = get_exit_velocity_distance.__wrapped__()["data"]
-    app.state.CACHE["drag_vs_hr"] = get_drag_vs_hr.__wrapped__()["data"]
+    from .api.endpoints import fetch_exit_velocity_distance_data
+    app.state.CACHE["exit_velocity_distance"] = fetch_exit_velocity_distance_data("2015-01-01", None)
     # Add more as needed
 
 @app.on_event("startup")
